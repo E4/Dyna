@@ -7,3 +7,5 @@ Invoke `Dyna.create` with the structure as the parameter to have it generate the
 Subsequent changes to primitive values in the structure will dynamically update the values in the DOM (primitive values like strings).
 
 Structural changes (adding/removing elements from the structure or arrays) you simply call `Dyna.create` or `Dyna.update` to have it update the DOM to match the new structure. For example: You can push/pop into the children array.
+
+[See it working](https://e4.github.io/Dyna/dynaexample.html)
