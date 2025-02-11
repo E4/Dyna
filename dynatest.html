@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dyna Example</title>
+    <link rel="stylesheet" type="text/css" href="zabutton.css"/>
+    <script src="dyna.js"></script>
+
+    <script>
+      /* returns pair of inputs: slider and number range */
+      function SlideRange(options={}) {
+        function changed(e) {
+          slider.value = text.value = e.target.value;
+          if(options["on-change"]) options["on-change"](e.target.value);
+          Dyna.update(content);
+        }
+        var slider,text;
+        var content = Dyna.div("sliderange",null,null,[
+            slider = Dyna.input("","range",{"min":0,"max":255,"value":255,"on-change":changed,"on-mousemove":changed}),
+            text = Dyna.input("","number",{"min":0,"max":255,"value":255, "on-change":changed,"on-keydown":changed,"on-keyup":changed})
+        ]);
+        Object.defineProperty(content, "value", {
+          get: ()=>parseInt(slider.value),
+          set: (newValue)=>{slider.value = text.value = newValue;Dyna.update(content);}
+        });
+        return content;
+      };
+
+      /* creates an example to show how Dyna works */
+      function DynaExample() {
+        var slider = {}
+        function changed() {
+          coloroutput.style = `background-color:${("#" + ([r.value, g.value, b.value].map(x => x.toString(16).padStart(2, "0")).join("")))}`;
+        }
+        function reset(){
+          r.value = g.value = b.value = 255;
+          changed()
+        }
+        function random() {
+          r.value = Math.floor(Math.random()*255);
+          g.value = Math.floor(Math.random()*255);
+          b.value = Math.floor(Math.random()*255);
+          changed()
+        }
+        var coloroutput,r,g,b;
+        var content = Dyna.div("",null,null,[
+          coloroutput = Dyna.div("colordisplay","color",{"style":"background-color:white;"}),
+          r = SlideRange({"on-change":changed}),
+          g = SlideRange({"on-change":changed}),
+          b = SlideRange({"on-change":changed}),
+          Dyna.zabutton("test","reset",{"on-click":reset}),
+          Dyna.zabutton("test","random",{"on-click":random})
+        ])
+        return content;
+      }
+
+      window.addEventListener('load', function () {
+        Dyna.create(DynaExample(),document.body);
+      });
+
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>

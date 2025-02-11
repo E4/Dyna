@@ -1,0 +1,56 @@
+button.zabutton {
+  color:#000000;
+  background-color: #beb6c5;
+  overflow:hidden;
+  position:relative;
+  border-radius:3px;
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, .2);
+  transition-duration: 0.25s;
+  border:none;
+  cursor: pointer;
+  text-align: left;
+  padding: 5px 10px;
+  margin:2px;
+}
+
+button.zabutton:active {
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, .2);
+}
+
+button.zabutton:disabled,
+button.zabutton[disabled] {
+  color: #8c8c8c;
+  background: dimgrey;
+}
+
+button.zabutton span.buttoncircle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgb(158 242 0);
+  width: 1vmin;
+  height: 1vmin;
+  transform: translate(-50%, -50%) scale(0);
+  animation: buttoncircle 0.25s ease-out forwards;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 10px 10px;
+}
+
+button.zabutton span.remove {
+  transition-duration:0.5s;
+  opacity: 0;
+}
+
+@keyframes buttoncircle {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+button.zabutton div,
+button.zabutton img,
+button.zabutton span {
+  pointer-events: none;
+  position: relative;
+  display:inline-block;
+}
